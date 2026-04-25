@@ -1,0 +1,18 @@
+
+
+{
+  "player_id": "VIRAT_KOHLI_018",
+  "match_id": "IPL_2024_FINAL",
+  "innings_id": "RCB_INN_2",
+  "shot_type": "loft",
+  "total_shots": 30,
+  "scoring_shots": 24,
+  "dismissals": 2,
+  "total_runs_from_shot": 95,
+  "current_batter_strike_rate": 158.3,
+  "incoming_batter_strike_rate": 135.0,
+  "balls_remaining": 30,
+  "phase": "death",
+  "extra_type": null,
+  "baseline_runs": 100
+}

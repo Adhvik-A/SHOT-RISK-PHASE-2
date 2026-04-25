@@ -6,8 +6,7 @@ def calculate_probabilities(total_shots, scoring_shots, dismissals):
 
 def calculate_average_reward(total_runs, total_shots):
     """
-    FIXED:
-    Reward is now runs per shot (not per scoring shot)
+    Reward is runs per shot (not per scoring shot).
     This aligns reward with risk scale.
     """
     return total_runs / total_shots
@@ -17,7 +16,7 @@ def get_phase_multiplier(phase: str):
     return {
         "powerplay": 1.2,
         "middle": 1.0,
-        "death": 0.8
+        "death": 0.8,
     }.get(phase.lower(), 1.0)
 
 
@@ -28,7 +27,6 @@ def calculate_wicket_cost(current_sr, new_sr, balls_remaining, phase, baseline):
     - Reduced if incoming batter is better
     - Never zero (floor applied)
     """
-
     sr_diff = current_sr - new_sr
 
     if sr_diff <= 0:
@@ -46,17 +44,19 @@ def calculate_wicket_cost(current_sr, new_sr, balls_remaining, phase, baseline):
 
 def calculate_expected_value(p, q, r, s):
     """
-    FINAL EV MODEL (BALANCED):
+    EV MODEL (BALANCED):
+      - Non-linear dismissal penalty
+      - Amplified wicket impact
     """
-    dismissal_penalty = q ** 2        # non-linear penalty
-    risk_component = q * s * 2        # amplified wicket impact
+    dismissal_penalty = q ** 2       # non-linear penalty
+    risk_component = q * s * 2       # amplified wicket impact
 
     return (p * r) - risk_component - dismissal_penalty
 
 
 def calculate_efficiency_score(t):
     """
-    Only for UI display
+    Normalised 0–100 score for UI display only.
     """
     score = (t + 1) * 50
     return max(0, min(score, 100))
@@ -64,9 +64,8 @@ def calculate_efficiency_score(t):
 
 def classify_shot(t):
     """
-    FINAL classification using expected value (NOT score)
+    Classification using expected value (NOT score).
     """
-
     if t >= 0.25:
         return "High Efficiency Shot"
     elif t >= 0.1:

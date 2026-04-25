@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: khel-ai-bowler-momentum-api
+    name: khel-ai-shot-risk-api
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn score:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: khel_ai_mvp.settings
